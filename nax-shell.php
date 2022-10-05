@@ -347,7 +347,7 @@ function hi_permission($items) {
 ?>
 </div>
 <div class="footer">
-  <a href="https://www.naxtarrr.my.id">Coded & Designed By N4ST4R_ID</a>
+  Coded & Designed By <a href="https://www.naxtarrr.my.id">N4ST4R_ID</a>
 </div>
 <script>
   const file = document.querySelector('input[type="file"]')
