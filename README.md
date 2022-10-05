@@ -18,4 +18,4 @@ but none of them worked, even I just uploaded an uploader I still got 403.
 
 Probably it's because my shells or uploader includes some forbidden keywords or functions. 
 Then I make my own shell without those keywords or functions. 
-And here I am lol
+And here I am lol. And of course it can bypass 403 in Litespeed.
