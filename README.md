@@ -7,7 +7,7 @@ This shell is 95% coded by myself and 5% definitely stolen code lmao
 * Create Folder
 * Create File
 * Spawn ToolKit (Not finished yet)
-* Info Min (Server Info)
+* Info Min (Web Info)
 * Upload File
 * Command
 
