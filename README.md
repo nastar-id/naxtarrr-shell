@@ -1,2 +1,2 @@
-# naxtarrr-shell
+# Naxtarrr Shell Backdoor
 Naxtarrr Shell Backdoor
