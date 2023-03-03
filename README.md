@@ -8,7 +8,7 @@ This shell is 95% coded by myself and 5% definitely stolen code lmao
 * Responsive Design (hopefully, because I don't have computer lol)
 * Create Folder
 * Create File
-* Spawn ToolKit (Not finished yet)
+* Spawn ToolKit
 * Info Min (Web Info)
 * Upload File
 * Command
