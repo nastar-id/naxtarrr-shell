@@ -5,7 +5,7 @@
   <meta name="author" content="N4ST4R_ID">
   <title>Na}{tarrr</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-  <link rel="stylesheet" href="https://naxtarrr.netlify.app/css/shell_style.css">
+  <link rel="stylesheet" href="https://naxtarrr.netlify.app/assets/css/shell_style.css">
 </head>
 <body>
   <?php
