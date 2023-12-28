@@ -52,6 +52,7 @@
 
       $paths = explode("/", $path);
       echo 'Current Path: ';
+      echo ($os !== "Windows") ? "<a href='?path=/'>~</a>" : "";
       foreach ($paths as $id => $pat) {
         echo "<a href='?path=";
         for ($i = 0; $i <= $id; $i++) {
