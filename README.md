@@ -12,3 +12,5 @@ This shell is 95% coded by myself and 5% definitely stolen code lmao
 * Info Min (Web Info)
 * Upload File
 * Command
+
+This shell is for bypass Wordfence, Litespeed, Auto delete, Auto blanked etc. Will continue to be updated to make it more powerful for hard bypass (Nax Shell v2 only).
